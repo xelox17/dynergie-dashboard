@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { getMissions, createMission, updateMission, deleteMission, Mission, MissionStatus } from "@/lib/api";
-import { Plus, Search, Filter, Calendar, User, Briefcase, Trash2, Edit2, X, ChevronDown } from "lucide-react";
+import { Plus, Search, Filter, Calendar, User, Briefcase, Trash2, Edit2, X } from "lucide-react";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 

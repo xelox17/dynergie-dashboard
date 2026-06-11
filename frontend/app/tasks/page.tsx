@@ -24,12 +24,10 @@ function TaskCard({
   task,
   index,
   missions,
-  onStatusChange,
 }: {
   task: Task;
   index: number;
   missions: Mission[];
-  onStatusChange: (id: number, status: TaskStatus) => void;
 }) {
   const mission     = missions.find(m => m.id === task.mission_id);
   const PriorityIcon = PRIORITY_ICONS[task.priority] ?? Minus;
@@ -272,9 +270,6 @@ export default function TasksPage() {
                           task={task}
                           index={index}
                           missions={missions}
-                          onStatusChange={(id, status) =>
-                            setTasks(prev => prev.map(t => t.id === id ? { ...t, status } : t))
-                          }
                         />
                       ))}
                       {provided.placeholder}
