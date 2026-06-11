@@ -9,8 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        brand: {
+          50:  "#f5f0ff",
+          100: "#ede5ff",
+          200: "#d9ccff",
+          300: "#be9fff",
+          400: "#a277ff", // Dynergie signature
+          500: "#8b52f7",
+          600: "#7830e3",
+          700: "#6520c0",
+          800: "#531c9c",
+          900: "#451880",
+        },
+        lime: {
+          brand: "#c5f135", // Dynergie logo background
+        },
       },
     },
   },

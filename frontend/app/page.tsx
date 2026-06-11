@@ -1,117 +1,41 @@
-import {
-  Briefcase,
-  Clock,
-  CheckSquare,
-  TrendingUp,
-  AlertCircle,
-  ArrowUpRight,
-} from "lucide-react";
+import { Briefcase, Clock, CheckSquare, TrendingUp, AlertCircle, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-// Static demo data — will be replaced by API calls in later iterations
 const kpis = [
-  {
-    label: "Missions actives",
-    value: "3",
-    delta: "+1 ce mois",
-    positive: true,
-    icon: Briefcase,
-    color: "text-blue-400",
-    bg: "bg-blue-500/10",
-    border: "border-blue-500/20",
-    href: "/missions",
-  },
-  {
-    label: "Heures cette semaine",
-    value: "37.5h",
-    delta: "5 jours travaillés",
-    positive: true,
-    icon: Clock,
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
-    border: "border-emerald-500/20",
-    href: "/time-tracking",
-  },
-  {
-    label: "Tâches en cours",
-    value: "4",
-    delta: "2 haute priorité",
-    positive: false,
-    icon: CheckSquare,
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/20",
-    href: "/tasks",
-  },
-  {
-    label: "Articles de veille",
-    value: "6",
-    delta: "3 nouveaux",
-    positive: true,
-    icon: TrendingUp,
-    color: "text-indigo-400",
-    bg: "bg-indigo-500/10",
-    border: "border-indigo-500/20",
-    href: "/watch",
-  },
+  { label: "Missions actives",    value: "3",     delta: "+1 ce mois",       positive: true,  icon: Briefcase,   color: "text-brand-400",   bg: "bg-brand-400/10",   border: "border-brand-400/20",   href: "/missions" },
+  { label: "Heures cette semaine", value: "37.5h", delta: "5 jours travaillés", positive: true,  icon: Clock,       color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20", href: "/time-tracking" },
+  { label: "Tâches en cours",     value: "4",     delta: "2 haute priorité", positive: false, icon: CheckSquare, color: "text-amber-400",   bg: "bg-amber-500/10",   border: "border-amber-500/20",   href: "/tasks" },
+  { label: "Articles de veille",  value: "6",     delta: "3 nouveaux",       positive: true,  icon: TrendingUp,  color: "text-indigo-400",  bg: "bg-indigo-500/10",  border: "border-indigo-500/20",  href: "/watch" },
 ];
 
 const recentMissions = [
-  {
-    id: 3,
-    title: "Déploiement IA Générative RH",
-    client: "Michelin",
-    status: "in_progress",
-    deadline: "2026-09-30",
-    progress: 40,
-  },
-  {
-    id: 1,
-    title: "Transformation Digitale Banque Centrale",
-    client: "BNP Paribas",
-    status: "in_progress",
-    deadline: "2026-08-31",
-    progress: 55,
-  },
-  {
-    id: 2,
-    title: "Audit SI & Cybersécurité",
-    client: "Groupe Sanofi",
-    status: "in_progress",
-    deadline: "2026-07-15",
-    progress: 30,
-  },
+  { id: 3, title: "Déploiement IA Générative RH",          client: "Michelin",    status: "in_progress", deadline: "2026-09-30", progress: 40 },
+  { id: 1, title: "Transformation Digitale Banque Centrale", client: "BNP Paribas", status: "in_progress", deadline: "2026-08-31", progress: 55 },
+  { id: 2, title: "Audit SI & Cybersécurité",              client: "Groupe Sanofi", status: "in_progress", deadline: "2026-07-15", progress: 30 },
 ];
 
 const upcomingDeadlines = [
-  { mission: "Audit SI & Cybersécurité", client: "Sanofi", days: 34, urgent: false },
-  { mission: "Transformation Digitale", client: "BNP Paribas", days: 81, urgent: false },
-  { mission: "Déploiement IA RH", client: "Michelin", days: 111, urgent: false },
+  { mission: "Audit SI & Cybersécurité",   client: "Sanofi",    days: 34 },
+  { mission: "Transformation Digitale",    client: "BNP Paribas", days: 81 },
+  { mission: "Déploiement IA RH",          client: "Michelin",   days: 111 },
 ];
 
 const statusLabel: Record<string, string> = {
-  in_progress: "En cours",
-  completed: "Terminée",
-  on_hold: "En pause",
-  cancelled: "Annulée",
+  in_progress: "En cours", completed: "Terminée", on_hold: "En pause", cancelled: "Annulée",
 };
-
 const statusClass: Record<string, string> = {
-  in_progress: "badge-in-progress",
-  completed: "badge-completed",
-  on_hold: "badge-on-hold",
-  cancelled: "badge-cancelled",
+  in_progress: "badge-in-progress", completed: "badge-completed", on_hold: "badge-on-hold", cancelled: "badge-cancelled",
 };
 
 export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Welcome banner */}
-      <div className="card p-5 flex items-center justify-between bg-gradient-to-r from-blue-600/10 to-indigo-600/10 border-blue-500/20">
+      <div className="card p-5 flex items-center justify-between bg-gradient-to-r from-brand-400/10 to-brand-600/10 border-brand-400/20">
         <div>
           <h2 className="text-lg font-semibold text-white">Bonjour, Anas</h2>
           <p className="text-sm text-gray-400 mt-0.5">
-            Vous avez <span className="text-blue-400 font-medium">3 missions actives</span> et{" "}
+            Vous avez <span className="text-brand-400 font-medium">3 missions actives</span> et{" "}
             <span className="text-amber-400 font-medium">4 tâches en attente</span> aujourd&apos;hui.
           </p>
         </div>
@@ -135,21 +59,17 @@ export default function DashboardPage() {
               <p className="text-2xl font-bold text-white">{value}</p>
               <p className="text-xs text-gray-500 mt-0.5">{label}</p>
             </div>
-            <p className={`text-xs mt-2 ${positive ? "text-emerald-400" : "text-amber-400"}`}>
-              {delta}
-            </p>
+            <p className={`text-xs mt-2 ${positive ? "text-emerald-400" : "text-amber-400"}`}>{delta}</p>
           </Link>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Missions en cours */}
+        {/* Missions */}
         <div className="lg:col-span-2 card p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-white">Mes missions</h3>
-            <Link href="/missions" className="text-xs text-blue-400 hover:text-blue-300 transition-colors">
-              Voir tout →
-            </Link>
+            <Link href="/missions" className="text-xs text-brand-400 hover:text-brand-300 transition-colors">Voir tout →</Link>
           </div>
           <div className="space-y-3">
             {recentMissions.map((m) => (
@@ -168,7 +88,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all"
+                      className="h-full bg-gradient-to-r from-brand-400 to-brand-600 rounded-full transition-all"
                       style={{ width: `${m.progress}%` }}
                     />
                   </div>
@@ -188,11 +108,9 @@ export default function DashboardPage() {
             {upcomingDeadlines.map((d, i) => (
               <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-gray-800/40 border border-gray-700/40">
                 <div className={`flex-shrink-0 text-center min-w-[40px] px-2 py-1 rounded-md ${
-                  d.days <= 14
-                    ? "bg-red-500/10 border border-red-500/20"
-                    : d.days <= 30
-                    ? "bg-amber-500/10 border border-amber-500/20"
-                    : "bg-gray-700/50 border border-gray-600/30"
+                  d.days <= 14 ? "bg-red-500/10 border border-red-500/20"
+                  : d.days <= 30 ? "bg-amber-500/10 border border-amber-500/20"
+                  : "bg-gray-700/50 border border-gray-600/30"
                 }`}>
                   <p className={`text-lg font-bold leading-none ${
                     d.days <= 14 ? "text-red-400" : d.days <= 30 ? "text-amber-400" : "text-gray-300"

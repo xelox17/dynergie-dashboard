@@ -48,7 +48,7 @@ export const updateArticle = (id: number, data: Partial<WatchArticle>) =>
 
 // ---- Types ----
 export type MissionStatus = "in_progress" | "completed" | "on_hold" | "cancelled";
-export type TaskStatus = "todo" | "in_progress" | "done";
+export type TaskStatus = "todo" | "in_progress" | "in_review" | "done";
 
 export interface Mission {
   id: number;
