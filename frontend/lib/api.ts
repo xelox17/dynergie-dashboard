@@ -1,4 +1,12 @@
+import {
+  MOCK_MISSIONS,
+  MOCK_TASKS,
+  MOCK_TIME_ENTRIES,
+  MOCK_ARTICLES,
+} from "./mock-data";
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 
 async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -13,38 +21,72 @@ async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
 }
 
 // --- Missions ---
-export const getMissions = () => fetchApi<Mission[]>("/api/missions/");
-export const getMission = (id: number) => fetchApi<Mission>(`/api/missions/${id}`);
-export const createMission = (data: MissionCreate) =>
-  fetchApi<Mission>("/api/missions/", { method: "POST", body: JSON.stringify(data) });
-export const updateMission = (id: number, data: Partial<Mission>) =>
-  fetchApi<Mission>(`/api/missions/${id}`, { method: "PATCH", body: JSON.stringify(data) });
-export const deleteMission = (id: number) =>
-  fetchApi<void>(`/api/missions/${id}`, { method: "DELETE" });
+export const getMissions = (): Promise<Mission[]> =>
+  DEMO ? Promise.resolve(MOCK_MISSIONS) : fetchApi<Mission[]>("/api/missions/");
+export const getMission = (id: number): Promise<Mission> =>
+  DEMO
+    ? Promise.resolve(MOCK_MISSIONS.find((m) => m.id === id) ?? MOCK_MISSIONS[0])
+    : fetchApi<Mission>(`/api/missions/${id}`);
+export const createMission = (data: MissionCreate): Promise<Mission> =>
+  DEMO
+    ? Promise.resolve({ id: Date.now(), ...data })
+    : fetchApi<Mission>("/api/missions/", { method: "POST", body: JSON.stringify(data) });
+export const updateMission = (id: number, data: Partial<Mission>): Promise<Mission> =>
+  DEMO
+    ? Promise.resolve({ ...(MOCK_MISSIONS.find((m) => m.id === id) ?? MOCK_MISSIONS[0]), ...data })
+    : fetchApi<Mission>(`/api/missions/${id}`, { method: "PATCH", body: JSON.stringify(data) });
+export const deleteMission = (id: number): Promise<void> =>
+  DEMO ? Promise.resolve() : fetchApi<void>(`/api/missions/${id}`, { method: "DELETE" });
 
 // --- Tasks ---
-export const getTasks = (missionId?: number) =>
-  fetchApi<Task[]>(`/api/tasks/${missionId ? `?mission_id=${missionId}` : ""}`);
-export const updateTask = (id: number, data: Partial<Task>) =>
-  fetchApi<Task>(`/api/tasks/${id}`, { method: "PATCH", body: JSON.stringify(data) });
-export const createTask = (data: TaskCreate) =>
-  fetchApi<Task>("/api/tasks/", { method: "POST", body: JSON.stringify(data) });
+export const getTasks = (missionId?: number): Promise<Task[]> => {
+  if (DEMO) {
+    const tasks = missionId ? MOCK_TASKS.filter((t) => t.mission_id === missionId) : MOCK_TASKS;
+    return Promise.resolve(tasks);
+  }
+  return fetchApi<Task[]>(`/api/tasks/${missionId ? `?mission_id=${missionId}` : ""}`);
+};
+export const updateTask = (id: number, data: Partial<Task>): Promise<Task> =>
+  DEMO
+    ? Promise.resolve({ ...(MOCK_TASKS.find((t) => t.id === id) ?? MOCK_TASKS[0]), ...data })
+    : fetchApi<Task>(`/api/tasks/${id}`, { method: "PATCH", body: JSON.stringify(data) });
+export const createTask = (data: TaskCreate): Promise<Task> =>
+  DEMO
+    ? Promise.resolve({ id: Date.now(), ...data })
+    : fetchApi<Task>("/api/tasks/", { method: "POST", body: JSON.stringify(data) });
 
 // --- Time entries ---
-export const getTimeEntries = (missionId?: number, consultant?: string) => {
+export const getTimeEntries = (missionId?: number, consultant?: string): Promise<TimeEntry[]> => {
+  if (DEMO) {
+    let entries = MOCK_TIME_ENTRIES;
+    if (missionId) entries = entries.filter((e) => e.mission_id === missionId);
+    if (consultant) entries = entries.filter((e) => e.consultant === consultant);
+    return Promise.resolve(entries);
+  }
   const params = new URLSearchParams();
   if (missionId) params.set("mission_id", String(missionId));
   if (consultant) params.set("consultant", consultant);
   return fetchApi<TimeEntry[]>(`/api/time-entries/?${params}`);
 };
-export const createTimeEntry = (data: TimeEntryCreate) =>
-  fetchApi<TimeEntry>("/api/time-entries/", { method: "POST", body: JSON.stringify(data) });
+export const createTimeEntry = (data: TimeEntryCreate): Promise<TimeEntry> =>
+  DEMO
+    ? Promise.resolve({ id: Date.now(), ...data })
+    : fetchApi<TimeEntry>("/api/time-entries/", { method: "POST", body: JSON.stringify(data) });
 
 // --- Watch ---
-export const getArticles = (category?: string) =>
-  fetchApi<WatchArticle[]>(`/api/watch/${category ? `?category=${category}` : ""}`);
-export const updateArticle = (id: number, data: Partial<WatchArticle>) =>
-  fetchApi<WatchArticle>(`/api/watch/${id}`, { method: "PATCH", body: JSON.stringify(data) });
+export const getArticles = (category?: string): Promise<WatchArticle[]> => {
+  if (DEMO) {
+    const articles = category
+      ? MOCK_ARTICLES.filter((a) => a.category === category)
+      : MOCK_ARTICLES;
+    return Promise.resolve(articles);
+  }
+  return fetchApi<WatchArticle[]>(`/api/watch/${category ? `?category=${category}` : ""}`);
+};
+export const updateArticle = (id: number, data: Partial<WatchArticle>): Promise<WatchArticle> =>
+  DEMO
+    ? Promise.resolve({ ...(MOCK_ARTICLES.find((a) => a.id === id) ?? MOCK_ARTICLES[0]), ...data })
+    : fetchApi<WatchArticle>(`/api/watch/${id}`, { method: "PATCH", body: JSON.stringify(data) });
 
 // ---- Types ----
 export type MissionStatus = "in_progress" | "completed" | "on_hold" | "cancelled";
