@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
@@ -11,9 +12,20 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Accept localhost (dev) + any Vercel deployment URL
+origins = [
+    "http://localhost:3000",
+    "https://localhost:3000",
+]
+
+extra = os.getenv("ALLOWED_ORIGINS", "")
+if extra:
+    origins += [o.strip() for o in extra.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
