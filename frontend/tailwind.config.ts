@@ -9,20 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Dynergie brand green — basé sur #7BC67E (vert signature)
         brand: {
-          50:  "#f5f0ff",
-          100: "#ede5ff",
-          200: "#d9ccff",
-          300: "#be9fff",
-          400: "#a277ff", // Dynergie signature
-          500: "#8b52f7",
-          600: "#7830e3",
-          700: "#6520c0",
-          800: "#531c9c",
-          900: "#451880",
-        },
-        lime: {
-          brand: "#c5f135", // Dynergie logo background
+          50:  "#f1faf1",
+          100: "#dff3e0",
+          200: "#bde7bf",
+          300: "#92d595",
+          400: "#7bc67e", // couleur principale Dynergie
+          500: "#58b05c",
+          600: "#3f9643",
+          700: "#2e7a32",
+          800: "#1f6023",
+          900: "#154a18",
         },
       },
     },

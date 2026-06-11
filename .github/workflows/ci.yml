@@ -2,35 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
 jobs:
-  backend:
-    name: Backend — Lint & Test
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-          cache-dependency-path: backend/requirements-dev.txt
-
-      - name: Install dependencies
-        working-directory: backend
-        run: pip install -r requirements-dev.txt
-
-      - name: Run tests
-        working-directory: backend
-        run: pytest tests/ -v --tb=short
-
+  # ── Frontend ──────────────────────────────────────────────────────────────
   frontend:
-    name: Frontend — Type-check & Build
+    name: Frontend — Typecheck & Build
     runs-on: ubuntu-latest
 
     steps:
@@ -54,3 +33,26 @@ jobs:
       - name: Build
         working-directory: frontend
         run: npm run build
+
+  # ── Backend ───────────────────────────────────────────────────────────────
+  backend:
+    name: Backend — Tests pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/requirements-dev.txt
+
+      - name: Install dependencies
+        working-directory: backend
+        run: pip install -r requirements-dev.txt
+
+      - name: Run tests
+        working-directory: backend
+        run: pytest tests/ -v --tb=short

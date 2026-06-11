@@ -10,7 +10,7 @@ import { Clock, Plus, TrendingUp, Calendar, X } from "lucide-react";
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const DAYS_FR = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
-const CHART_COLORS = ["#a277ff", "#6366f1", "#3b82f6", "#10b981", "#f59e0b", "#ef4444"];
+const CHART_COLORS = ["#7bc67e", "#3f9643", "#92d595", "#daff70", "#58b05c", "#bde7bf"];
 
 function getWeekDates(offset = 0): Date[] {
   const now    = new Date();
@@ -204,7 +204,7 @@ export default function TimeTrackingPage() {
                 labelStyle={{ color: "#e5e7eb" }}
                 formatter={(v) => [`${v}h`, "Heures"]}
               />
-              <Bar dataKey="hours" fill="#a277ff" radius={[4, 4, 0, 0]} maxBarSize={48} />
+              <Bar dataKey="hours" fill="#7bc67e" radius={[4, 4, 0, 0]} maxBarSize={48} />
             </BarChart>
           </ResponsiveContainer>
         </div>

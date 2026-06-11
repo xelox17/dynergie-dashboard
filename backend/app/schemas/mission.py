@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import date
 from app.models.mission import MissionStatus
 from typing import Optional
@@ -31,5 +31,4 @@ class MissionUpdate(BaseModel):
 class Mission(MissionBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
