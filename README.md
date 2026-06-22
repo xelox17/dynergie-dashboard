@@ -10,6 +10,20 @@
 
 ---
 
+## Screenshots
+
+| Tableau de bord | Missions |
+|:-:|:-:|
+| ![Tableau de bord](./docs/screenshots/dashboard.png) | ![Missions](./docs/screenshots/missions.png) |
+
+| Kanban Tâches | Suivi du temps |
+|:-:|:-:|
+| ![Kanban](./docs/screenshots/tasks.png) | ![Suivi du temps](./docs/screenshots/time-tracking.png) |
+
+> **Pour ajouter les captures d'écran :** faites un screenshot de chaque page (F12 → Device toolbar ou simplement la fenêtre), enregistrez les fichiers dans `docs/screenshots/` sous les noms `dashboard.png`, `missions.png`, `tasks.png`, `time-tracking.png`, puis commitez et pushez.
+
+---
+
 ## Contexte
 
 Ce dashboard a été conçu pour simuler l'outil de pilotage interne qu'utiliserait un cabinet de conseil en innovation comme Dynergie. Il couvre les 4 besoins principaux d'un consultant :

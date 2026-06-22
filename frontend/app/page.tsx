@@ -9,15 +9,15 @@ const kpis = [
 ];
 
 const recentMissions = [
-  { id: 3, title: "Déploiement IA Générative RH",          client: "Michelin",    status: "in_progress", deadline: "2026-09-30", progress: 40 },
-  { id: 1, title: "Transformation Digitale Banque Centrale", client: "BNP Paribas", status: "in_progress", deadline: "2026-08-31", progress: 55 },
-  { id: 2, title: "Audit SI & Cybersécurité",              client: "Groupe Sanofi", status: "in_progress", deadline: "2026-07-15", progress: 30 },
+  { id: 3, title: "Accompagnement levée de fonds Série A",   client: "Startup Deeptech",  status: "in_progress", deadline: "2026-10-31", progress: 40 },
+  { id: 1, title: "Dossier CIR 2026 — Financement R&D",      client: "Groupe Safran",     status: "in_progress", deadline: "2026-09-30", progress: 55 },
+  { id: 2, title: "Audit Innovation & Veille Technologique", client: "Airbus",            status: "in_progress", deadline: "2026-07-31", progress: 30 },
 ];
 
 const upcomingDeadlines = [
-  { mission: "Audit SI & Cybersécurité",   client: "Sanofi",    days: 34 },
-  { mission: "Transformation Digitale",    client: "BNP Paribas", days: 81 },
-  { mission: "Déploiement IA RH",          client: "Michelin",   days: 111 },
+  { mission: "Audit Innovation",    client: "Airbus",           days: 39  },
+  { mission: "Dossier CIR 2026",   client: "Groupe Safran",    days: 100 },
+  { mission: "Levée de fonds",      client: "Startup Deeptech", days: 131 },
 ];
 
 const statusLabel: Record<string, string> = {
